@@ -1,0 +1,132 @@
+<section id="hero" class="hero">
+  <!-- Particle canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Grid overlay -->
+  <div class="grid-overlay"></div>
+
+  <div class="container hero-content">
+    <div class="hero-text">
+      <!-- Availability badge -->
+      <div class="availability-badge">
+        <span class="dot"></span>
+        Available for new projects
+      </div>
+
+      <h1>
+        We Build<br>
+        <span class="typewriter-wrapper">
+          <span class="gradient-text typewriter">{{ displayWord }}</span><span class="cursor">|</span>
+        </span>
+        <br>Excellence
+      </h1>
+
+      <p class="hero-desc">
+        We're a team of <strong>4 elite freelancers</strong> with 4–5 years each of hands-on experience in
+        Frontend, Backend, Database, and DevOps — delivering full-stack digital products that
+        <em>stand out</em>.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" (click)="scrollTo('contact')">
+          <i class='bx bx-rocket'></i> Start a Project
+        </button>
+        <button class="btn btn-outline" (click)="scrollTo('projects')">
+          <i class='bx bx-play-circle'></i> View Our Work
+        </button>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>50+</strong>
+          <span>Projects Delivered</span>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <strong>4–5 yrs</strong>
+          <span>Per Specialist</span>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <strong>100%</strong>
+          <span>Client Satisfaction</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Visual -->
+    <div class="hero-visual">
+      <div class="visual-card">
+        <div class="card-header">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="card-title">team_expertise.json</span>
+        </div>
+        <div class="card-body">
+          <pre><code><span class="c-bracket">&#123;</span>
+  <span class="c-key">"team"</span>: <span class="c-bracket">[</span>
+    <span class="c-bracket">&#123;</span>
+      <span class="c-key">"role"</span>: <span class="c-string">"Frontend Dev"</span>,
+      <span class="c-key">"exp"</span>: <span class="c-number">5</span>,
+      <span class="c-key">"tech"</span>: <span class="c-string">"React, Angular"</span>
+    <span class="c-bracket">&#125;</span>,
+    <span class="c-bracket">&#123;</span>
+      <span class="c-key">"role"</span>: <span class="c-string">"Backend Dev"</span>,
+      <span class="c-key">"exp"</span>: <span class="c-number">4</span>,
+      <span class="c-key">"tech"</span>: <span class="c-string">"Node, Python"</span>
+    <span class="c-bracket">&#125;</span>,
+    <span class="c-bracket">&#123;</span>
+      <span class="c-key">"role"</span>: <span class="c-string">"DB Engineer"</span>,
+      <span class="c-key">"exp"</span>: <span class="c-number">4</span>,
+      <span class="c-key">"tech"</span>: <span class="c-string">"PostgreSQL, Redis"</span>
+    <span class="c-bracket">&#125;</span>,
+    <span class="c-bracket">&#123;</span>
+      <span class="c-key">"role"</span>: <span class="c-string">"DevOps Eng"</span>,
+      <span class="c-key">"exp"</span>: <span class="c-number">5</span>,
+      <span class="c-key">"tech"</span>: <span class="c-string">"AWS, Docker, K8s"</span>
+    <span class="c-bracket">&#125;</span>
+  <span class="c-bracket">]</span>,
+  <span class="c-key">"status"</span>: <span class="c-string">"Available ✓"</span>
+<span class="c-bracket">&#125;</span></code></pre>
+        </div>
+        <!-- Floating badges -->
+        <div class="floating-badge badge-1">
+          <i class='bx bx-check-shield'></i> Full-Stack Team
+        </div>
+        <div class="floating-badge badge-2">
+          <i class='bx bxs-star'></i> Top Rated
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack Ticker -->
+  <div class="tech-ticker">
+    <div class="ticker-inner">
+      <div class="ticker-track">
+        <span *ngFor="let tech of techStack" class="ticker-item">
+          <i class='bx {{ tech.icon }}'></i> {{ tech.label }}
+        </span>
+        <!-- Duplicate for seamless loop -->
+        <span *ngFor="let tech of techStack" class="ticker-item" aria-hidden="true">
+          <i class='bx {{ tech.icon }}'></i> {{ tech.label }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" (click)="scrollTo('stats')">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>

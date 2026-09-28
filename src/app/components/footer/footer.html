@@ -1,0 +1,63 @@
+<footer class="footer">
+  <div class="footer-glow"></div>
+
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon"><i class='bx bx-code-alt'></i></div>
+          <span class="logo-text">Dev<span class="highlight">Craft</span></span>
+        </div>
+        <p>A team of four elite freelancers building exceptional digital products. Full-stack, end-to-end, no compromises.</p>
+        <div class="social-row">
+          <a *ngFor="let s of links.social" [href]="s.href" class="social-icon" [attr.aria-label]="s.label">
+            <i class='bx {{ s.icon }}'></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li *ngFor="let l of links.services"><a href="#">{{ l }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li *ngFor="let l of links.company"><a href="#">{{ l }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-col newsletter-col">
+        <h4>Stay in the Loop</h4>
+        <p>Get updates on our latest projects and tech articles.</p>
+        <div class="newsletter-input">
+          <input type="email" placeholder="your@email.com">
+          <button class="btn btn-primary btn-sm">
+            <i class='bx bx-send'></i>
+          </button>
+        </div>
+        <div class="contact-quick">
+          <a href="mailto:hello@devcraft.team">
+            <i class='bx bx-envelope'></i> hello@devcraft.team
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{ year }} DevCraft. Built with ❤️ using Angular</p>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>

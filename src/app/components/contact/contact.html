@@ -1,0 +1,125 @@
+<section id="contact" class="contact-section">
+  <div class="orb" style="width:500px;height:500px;background:rgba(108,99,255,0.1);bottom:-200px;left:-150px;"></div>
+  <div class="orb" style="width:300px;height:300px;background:rgba(250,112,154,0.1);top:-100px;right:-80px;"></div>
+
+  <div class="container">
+    <div class="section-header">
+      <div class="badge"><i class='bx bx-mail-send'></i> Contact Us</div>
+      <h2>Let's Build Something <span>Amazing Together</span></h2>
+      <p>Got a project? Tell us about it. We typically respond within 24 hours.</p>
+    </div>
+
+    <div class="contact-layout">
+      <!-- Left: Info -->
+      <div class="contact-info">
+        <div class="info-card">
+          <h3>Why Work With Us?</h3>
+          <div class="why-list">
+            <div class="why-item" *ngFor="let item of ['Full-stack team under one roof', 'Transparent pricing & timelines', 'Weekly progress updates', 'Code ownership & documentation', 'Post-launch support included', '4–5 years of hands-on expertise each']">
+              <div class="why-check"><i class='bx bx-check'></i></div>
+              <span>{{ item }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact channels -->
+        <div class="channel-list">
+          <a class="channel" *ngFor="let ch of channels" href="#">
+            <div class="channel-icon" [style.background]="'rgba(0,0,0,0.2)'" [style.color]="ch.color">
+              <i class='bx {{ ch.icon }}'></i>
+            </div>
+            <div>
+              <strong>{{ ch.label }}</strong>
+              <span>{{ ch.value }}</span>
+            </div>
+            <i class='bx bx-right-arrow-alt channel-arrow'></i>
+          </a>
+        </div>
+
+        <!-- Response time badge -->
+        <div class="response-badge">
+          <div class="pulse-dot"></div>
+          <span>Average response time: <strong>4 hours</strong></span>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="contact-form-wrap">
+        <!-- Success State -->
+        <div class="success-state" *ngIf="submitted">
+          <div class="success-icon">
+            <i class='bx bx-check-circle'></i>
+          </div>
+          <h3>Message Sent! 🎉</h3>
+          <p>Thanks for reaching out! We'll review your project details and get back to you within 24 hours.</p>
+          <button class="btn btn-outline" (click)="resetForm()">
+            Send Another Message
+          </button>
+        </div>
+
+        <!-- Form -->
+        <form class="contact-form" *ngIf="!submitted" (ngSubmit)="onSubmit()" #contactForm="ngForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <div class="input-wrap">
+                <i class='bx bx-user'></i>
+                <input id="name" type="text" placeholder="John Doe" [(ngModel)]="form.name" name="name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <div class="input-wrap">
+                <i class='bx bx-envelope'></i>
+                <input id="email" type="email" placeholder="john@company.com" [(ngModel)]="form.email" name="email" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service">Service Needed</label>
+              <div class="input-wrap select-wrap">
+                <i class='bx bx-cog'></i>
+                <select id="service" [(ngModel)]="form.service" name="service">
+                  <option value="">Select a service…</option>
+                  <option *ngFor="let s of services" [value]="s">{{ s }}</option>
+                </select>
+                <i class='bx bx-chevron-down select-arrow'></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="budget">Project Budget</label>
+              <div class="input-wrap select-wrap">
+                <i class='bx bx-dollar'></i>
+                <select id="budget" [(ngModel)]="form.budget" name="budget">
+                  <option value="">Select budget range…</option>
+                  <option *ngFor="let b of budgets" [value]="b">{{ b }}</option>
+                </select>
+                <i class='bx bx-chevron-down select-arrow'></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Project Description *</label>
+            <div class="input-wrap textarea-wrap">
+              <i class='bx bx-message-square-detail'></i>
+              <textarea id="message" rows="5" placeholder="Tell us about your project goals, timeline, and any specific requirements…"
+                        [(ngModel)]="form.message" name="message" required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn" [disabled]="loading">
+            <ng-container *ngIf="!loading">
+              <i class='bx bx-send'></i> Send Project Brief
+            </ng-container>
+            <ng-container *ngIf="loading">
+              <span class="spinner"></span> Sending…
+            </ng-container>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+<section id="services" class="services-section">
+  <!-- Background decoration -->
+  <div class="orb" style="width:400px;height:400px;background:rgba(108,99,255,0.12);top:-100px;right:-100px;"></div>
+
+  <div class="container">
+    <div class="section-header">
+      <div class="badge"><i class='bx bx-cog'></i> Our Services</div>
+      <h2>Everything You Need to <span>Ship Fast</span></h2>
+      <p>A complete, end-to-end engineering team at your fingertips — no hiring, no overhead, just results.</p>
+    </div>
+
+    <div class="services-layout">
+      <!-- Tab Selector -->
+      <div class="service-tabs">
+        <button
+          *ngFor="let svc of services; let i = index"
+          class="tab-btn"
+          [class.active]="activeService === i"
+          [style.--tab-color]="svc.color"
+          (click)="setActive(i)">
+          <div class="tab-icon" [style.background]="activeService === i ? svc.gradient : ''">
+            <i class='bx {{ svc.icon }}'></i>
+          </div>
+          <div class="tab-text">
+            <strong>{{ svc.title }}</strong>
+          </div>
+          <i class='bx bx-chevron-right tab-arrow'></i>
+        </button>
+      </div>
+
+      <!-- Service Detail Panel -->
+      <div class="service-panel" *ngIf="services[activeService] as svc">
+        <div class="panel-inner">
+          <div class="panel-icon-wrap" [style.background]="svc.gradient">
+            <i class='bx {{ svc.icon }}'></i>
+          </div>
+          <h3>{{ svc.title }}</h3>
+          <p>{{ svc.description }}</p>
+
+          <div class="features-grid">
+            <div class="feature-item" *ngFor="let feat of svc.features">
+              <i class='bx bx-check' [style.color]="svc.color"></i>
+              <span>{{ feat }}</span>
+            </div>
+          </div>
+
+          <button class="btn btn-outline mt" (click)="scroll('contact')">
+            Request This Service <i class='bx bx-right-arrow-alt'></i>
+          </button>
+        </div>
+
+        <!-- Decorative glow -->
+        <div class="panel-glow" [style.background]="svc.gradient"></div>
+      </div>
+    </div>
+  </div>
+</section>

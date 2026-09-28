@@ -1,0 +1,14 @@
+<section id="stats" class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of stats">
+        <div class="stat-icon" [style.background]="'rgba(' + hexToRgb(stat.color) + ', 0.12)'"
+             [style.border-color]="'rgba(' + hexToRgb(stat.color) + ', 0.25)'">
+          <i class='bx {{ stat.icon }}' [style.color]="stat.color"></i>
+        </div>
+        <div class="stat-value" [style.color]="stat.color">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+  </div>
+</section>

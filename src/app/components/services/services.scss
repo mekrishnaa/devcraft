@@ -1,0 +1,218 @@
+.services-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--dark);
+}
+
+.services-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+// Tabs
+.service-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  color: var(--text-secondary);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--tab-color, var(--primary));
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    border-radius: 0 2px 2px 0;
+  }
+
+  &:hover {
+    border-color: rgba(108,99,255,0.3);
+    background: rgba(108,99,255,0.06);
+    color: var(--text-primary);
+    transform: translateX(4px);
+
+    &::before { transform: scaleY(1); }
+  }
+
+  &.active {
+    border-color: var(--tab-color, var(--primary));
+    background: rgba(108,99,255,0.08);
+    color: var(--text-primary);
+    transform: translateX(4px);
+
+    &::before { transform: scaleY(1); }
+  }
+
+  .tab-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.06);
+    transition: var(--transition);
+
+    i { color: white; }
+  }
+
+  &.active .tab-icon {
+    box-shadow: 0 4px 16px rgba(108,99,255,0.4);
+  }
+
+  .tab-text {
+    flex: 1;
+    strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+  }
+
+  .tab-arrow {
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  &.active .tab-arrow,
+  &:hover .tab-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+// Panel
+.service-panel {
+  position: relative;
+  background: var(--gradient-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 480px;
+
+  .panel-inner {
+    padding: 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .panel-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(108,99,255,0.3);
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    font-size: 1rem;
+  }
+
+  .panel-glow {
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.15;
+    z-index: 1;
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+
+  i {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+}
+
+.mt { margin-top: 8px; }
+
+@media (max-width: 1024px) {
+  .services-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .service-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .tab-btn {
+      flex: 1 1 calc(50% - 4px);
+      flex-direction: column;
+      text-align: center;
+      padding: 16px;
+      transform: none !important;
+
+      &::before {
+        top: 0; left: 0; right: 0; bottom: auto;
+        width: auto; height: 3px;
+        transform: scaleX(0);
+        border-radius: 0 0 2px 2px;
+      }
+      &.active::before, &:hover::before { transform: scaleX(1); }
+
+      .tab-arrow { display: none; }
+    }
+  }
+
+  .service-panel .panel-inner { padding: 32px; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .service-tabs .tab-btn { flex: 1 1 100%; }
+}
