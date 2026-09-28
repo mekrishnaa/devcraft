@@ -1,42 +1,57 @@
 .team-section {
+  background: #07070f;
   position: relative;
   overflow: hidden;
-  background: var(--dark-2);
+
+  .orb-tl {
+    position: absolute; top: -120px; left: -100px;
+    width: 400px; height: 400px;
+    background: rgba(124,58,237,0.08);
+    border-radius: 50%; filter: blur(100px);
+    pointer-events: none;
+  }
+  .orb-br {
+    position: absolute; bottom: -100px; right: -80px;
+    width: 350px; height: 350px;
+    background: rgba(236,72,153,0.07);
+    border-radius: 50%; filter: blur(100px);
+    pointer-events: none;
+  }
 }
 
 .team-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
+  position: relative; z-index: 2;
 }
 
+/* ── Member card ─────────────── */
 .member-card {
-  background: var(--gradient-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.022);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
 
   &:hover, &.active {
-    border-color: var(--member-color, var(--primary));
-    transform: translateY(-8px);
+    border-color: var(--member-color, #7c3aed);
+    transform: translateY(-10px);
     box-shadow:
-      0 20px 60px rgba(0,0,0,0.4),
-      0 0 40px rgba(var(--member-color, 108,99,255), 0.2);
+      0 30px 80px rgba(0,0,0,0.5),
+      0 0 0 1px var(--member-color, #7c3aed),
+      0 0 60px rgba(124,58,237,0.15);
   }
 }
 
-.card-top-glow {
-  height: 4px;
+.card-top-bar {
+  height: 3px;
   width: 100%;
   transition: height 0.3s ease;
-
-  .member-card:hover & { height: 6px; }
+  .member-card:hover & { height: 5px; }
 }
 
 .card-header {
@@ -47,161 +62,117 @@
 }
 
 .avatar {
-  width: 56px;
-  height: 56px;
+  width: 54px; height: 54px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
   color: white;
   font-family: 'Space Grotesk', sans-serif;
   flex-shrink: 0;
   position: relative;
 
   .avatar-ring {
-    position: absolute;
-    inset: -3px;
+    position: absolute; inset: -3px;
     border-radius: 50%;
     border: 2px solid;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    animation: rotate 8s linear infinite;
+    transition: opacity 0.3s;
+    animation: spin 10s linear infinite;
   }
-
   .member-card:hover & .avatar-ring { opacity: 0.6; }
 }
 
-.member-info {
-  h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
+.member-meta {
+  h3 { font-size: 0.95rem; font-weight: 800; margin-bottom: 2px; }
 
-  .role {
+  .role-label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     margin-bottom: 6px;
   }
 
-  .exp-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    background: rgba(255,255,255,0.06);
-    padding: 2px 8px;
-    border-radius: 100px;
-
-    i { font-size: 0.85rem; }
+  .exp-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.68rem; color: var(--text-3);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 2px 9px; border-radius: 100px;
+    i { font-size: 0.8rem; }
   }
 }
 
 .tagline {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.65;
   padding: 14px 24px 18px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   font-style: italic;
 }
 
-// Skills
-.skills {
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  border-bottom: 1px solid var(--border);
-}
+/* Skills */
+.skills { padding: 18px 24px; display: flex; flex-direction: column; gap: 11px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
 .skill-row {
-  .skill-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-
-    .skill-name {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .skill-pct {
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
+  .skill-head {
+    display: flex; justify-content: space-between; margin-bottom: 5px;
+    .skill-name { font-size: 0.76rem; color: var(--text-2); font-weight: 500; }
+    .skill-pct  { font-size: 0.74rem; font-weight: 700; }
   }
-
   .skill-bar {
-    height: 5px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .skill-fill {
-    height: 100%;
-    border-radius: 100px;
-    width: 0;
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-
-    .member-card:hover & { /* animated by CSS */ }
+    height: 4px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden;
+    .skill-fill { height: 100%; border-radius: 100px; transition: width 1s cubic-bezier(0.4,0,0.2,1) 0.2s; }
   }
 }
 
-// Tools
+/* Tools */
 .tools {
-  padding: 16px 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 
-  .tag {
-    font-size: 0.72rem;
-    background: rgba(108,99,255,0.06);
+  .tool-tag {
+    display: inline-flex;
+    padding: 3px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600;
+    color: var(--text-3);
+    transition: var(--t);
+    .member-card:hover & {
+      border-color: rgba(255,255,255,0.12);
+      color: var(--text-2);
+    }
   }
 }
 
-// Social
+/* Social */
 .social-links {
   padding: 16px 24px;
-  display: flex;
-  gap: 8px;
+  display: flex; gap: 8px;
   margin-top: auto;
 }
 
-.social-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  transition: var(--transition);
+.soc-btn {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  color: var(--text-3);
+  transition: var(--t);
 
   &:hover {
-    background: rgba(108,99,255,0.15);
-    border-color: var(--member-color, var(--primary));
-    color: var(--member-color, var(--primary));
+    background: rgba(124,58,237,0.15);
+    border-color: rgba(124,58,237,0.4);
+    color: var(--purple-l);
     transform: translateY(-2px);
   }
 }
 
-@media (max-width: 1200px) {
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 600px) {
-  .team-grid { grid-template-columns: 1fr; }
-  .member-card:hover { transform: none; }
-}
+@media (max-width: 1200px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .team-grid { grid-template-columns: 1fr; } .member-card:hover { transform: none; } }

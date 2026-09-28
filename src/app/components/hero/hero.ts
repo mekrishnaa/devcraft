@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,118 +8,111 @@ import { CommonModule } from '@angular/common';
   templateUrl: './hero.html',
   styleUrls: ['./hero.scss']
 })
-export class HeroComponent implements OnInit {
+export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   words = ['Frontend', 'Backend', 'Database', 'DevOps'];
   currentWord = 0;
   displayWord = '';
   isDeleting = false;
   charIndex = 0;
+  private typeTimer: any = null;
 
-  techStack = [
-    { icon: 'bxl-react', label: 'React' },
-    { icon: 'bxl-angular', label: 'Angular' },
-    { icon: 'bxl-nodejs', label: 'Node.js' },
-    { icon: 'bxl-postgresql', label: 'PostgreSQL' },
-    { icon: 'bxl-docker', label: 'Docker' },
-    { icon: 'bxl-aws', label: 'AWS' },
-    { icon: 'bxl-typescript', label: 'TypeScript' },
-    { icon: 'bxl-python', label: 'Python' },
+  roles = [
+    { label: 'Frontend Dev',    color: '#a78bfa' },
+    { label: 'Backend Eng.',    color: '#67e8f9' },
+    { label: 'DB Specialist',   color: '#f9a8d4' },
+    { label: 'DevOps Eng.',     color: '#6ee7b7' }
   ];
 
-  ngOnInit() {
-    this.typeEffect();
-    this.animateParticles();
-  }
+  techTicker = ['React', 'Angular', 'Next.js', 'Node.js', 'PostgreSQL',
+                'Docker', 'AWS', 'TypeScript', 'Python', 'Redis', 'Kubernetes', 'Go', 'Terraform'];
+
+  constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit()       { this.typeEffect(); }
+  ngAfterViewInit(){ this.initParticles(); }
+  ngOnDestroy()    { if (this.typeTimer) clearTimeout(this.typeTimer); }
 
   typeEffect() {
     const word = this.words[this.currentWord];
+    let delay: number;
+
     if (this.isDeleting) {
-      this.displayWord = word.substring(0, this.charIndex - 1);
       this.charIndex--;
+      this.displayWord = word.substring(0, this.charIndex);
+      delay = 55;
+      if (this.charIndex === 0) {
+        this.isDeleting = false;
+        this.currentWord = (this.currentWord + 1) % this.words.length;
+        delay = 350;
+      }
     } else {
-      this.displayWord = word.substring(0, this.charIndex + 1);
       this.charIndex++;
+      this.displayWord = word.substring(0, this.charIndex);
+      delay = 110;
+      if (this.charIndex === word.length) {
+        this.isDeleting = true;
+        delay = 1600;
+      }
     }
 
-    let delay = this.isDeleting ? 60 : 120;
-
-    if (!this.isDeleting && this.charIndex === word.length) {
-      delay = 1800;
-      this.isDeleting = true;
-    } else if (this.isDeleting && this.charIndex === 0) {
-      this.isDeleting = false;
-      this.currentWord = (this.currentWord + 1) % this.words.length;
-      delay = 400;
-    }
-
-    setTimeout(() => this.typeEffect(), delay);
+    this.cdr.detectChanges();
+    this.typeTimer = setTimeout(() => this.typeEffect(), delay);
   }
 
-  animateParticles() {
-    // Canvas particle animation
-    setTimeout(() => {
-      const canvas = document.getElementById('particles') as HTMLCanvasElement;
+  initParticles() {
+    this.ngZone.runOutsideAngular(() => {
+      const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
       if (!canvas) return;
       const ctx = canvas.getContext('2d')!;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const resize = () => {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize);
 
-      const particles: any[] = [];
-      for (let i = 0; i < 80; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          r: Math.random() * 2 + 0.5,
-          alpha: Math.random() * 0.5 + 0.1,
-          color: Math.random() > 0.5 ? '108,99,255' : '250,112,154'
-        });
-      }
+      const colors = ['124,58,237', '6,182,212', '236,72,153'];
+      const dots: any[] = Array.from({ length: 65 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.4,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      }));
 
-      const animate = () => {
+      const frame = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
+        dots.forEach(d => {
+          d.x += d.vx; d.y += d.vy;
+          if (d.x < 0 || d.x > canvas.width)  d.vx *= -1;
+          if (d.y < 0 || d.y > canvas.height) d.vy *= -1;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${d.color},0.55)`;
           ctx.fill();
         });
-
-        // Draw connections
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx*dx + dy*dy);
-            if (dist < 100) {
+        for (let i = 0; i < dots.length; i++) {
+          for (let j = i + 1; j < dots.length; j++) {
+            const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 130) {
               ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(108,99,255,${0.15 * (1 - dist/100)})`;
+              ctx.moveTo(dots[i].x, dots[i].y);
+              ctx.lineTo(dots[j].x, dots[j].y);
+              ctx.strokeStyle = `rgba(124,58,237,${0.1 * (1 - dist / 130)})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
           }
         }
-
-        requestAnimationFrame(animate);
+        requestAnimationFrame(frame);
       };
-      animate();
-
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-    }, 100);
+      frame();
+    });
   }
 
-  scrollTo(section: string) {
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
 }

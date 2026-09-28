@@ -1,57 +1,76 @@
 <section id="services" class="services-section">
-  <!-- Background decoration -->
-  <div class="orb" style="width:400px;height:400px;background:rgba(108,99,255,0.12);top:-100px;right:-100px;"></div>
+  <div class="noise"></div>
 
   <div class="container">
     <div class="section-header">
-      <div class="badge"><i class='bx bx-cog'></i> Our Services</div>
-      <h2>Everything You Need to <span>Ship Fast</span></h2>
-      <p>A complete, end-to-end engineering team at your fingertips — no hiring, no overhead, just results.</p>
+      <div class="badge-pill"><i class='bx bxs-zap'></i> What We Do</div>
+      <h2>End-to-End <span class="grad-text">Engineering</span></h2>
+      <p>Every layer of your product, owned and expertly handled by dedicated specialists.</p>
     </div>
 
-    <div class="services-layout">
-      <!-- Tab Selector -->
-      <div class="service-tabs">
-        <button
-          *ngFor="let svc of services; let i = index"
-          class="tab-btn"
-          [class.active]="activeService === i"
-          [style.--tab-color]="svc.color"
-          (click)="setActive(i)">
-          <div class="tab-icon" [style.background]="activeService === i ? svc.gradient : ''">
-            <i class='bx {{ svc.icon }}'></i>
-          </div>
-          <div class="tab-text">
-            <strong>{{ svc.title }}</strong>
-          </div>
-          <i class='bx bx-chevron-right tab-arrow'></i>
-        </button>
+    <div class="bento-grid">
+
+      <!-- Frontend — large -->
+      <div class="bento-card b-lg b-purple">
+        <div class="b-icon"><i class='bx bx-paint'></i></div>
+        <h3>Frontend Development</h3>
+        <p>Pixel-perfect, blazing-fast interfaces that delight. Animations, SSR, PWAs — we speak every frontend dialect.</p>
+        <div class="b-tags">
+          <span *ngFor="let t of frontendTags">{{ t }}</span>
+        </div>
+        <div class="b-glow"></div>
+        <div class="b-number">01</div>
       </div>
 
-      <!-- Service Detail Panel -->
-      <div class="service-panel" *ngIf="services[activeService] as svc">
-        <div class="panel-inner">
-          <div class="panel-icon-wrap" [style.background]="svc.gradient">
-            <i class='bx {{ svc.icon }}'></i>
-          </div>
-          <h3>{{ svc.title }}</h3>
-          <p>{{ svc.description }}</p>
+      <!-- Backend — large -->
+      <div class="bento-card b-lg b-cyan">
+        <div class="b-icon"><i class='bx bx-server'></i></div>
+        <h3>Backend Development</h3>
+        <p>Scalable microservices and APIs built for millions of requests. Security, speed, and clean architecture.</p>
+        <div class="b-tags">
+          <span *ngFor="let t of backendTags">{{ t }}</span>
+        </div>
+        <div class="b-glow"></div>
+        <div class="b-number">02</div>
+      </div>
 
-          <div class="features-grid">
-            <div class="feature-item" *ngFor="let feat of svc.features">
-              <i class='bx bx-check' [style.color]="svc.color"></i>
-              <span>{{ feat }}</span>
-            </div>
-          </div>
+      <!-- Database — small -->
+      <div class="bento-card b-sm b-pink">
+        <div class="b-icon"><i class='bx bx-data'></i></div>
+        <h3>Database Engineering</h3>
+        <p>Rock-solid data modeling, query optimization, and reliability at scale.</p>
+        <div class="b-tags">
+          <span *ngFor="let t of dbTags">{{ t }}</span>
+        </div>
+        <div class="b-glow"></div>
+        <div class="b-number">03</div>
+      </div>
 
-          <button class="btn btn-outline mt" (click)="scroll('contact')">
-            Request This Service <i class='bx bx-right-arrow-alt'></i>
+      <!-- DevOps — small -->
+      <div class="bento-card b-sm b-green">
+        <div class="b-icon"><i class='bx bx-cloud'></i></div>
+        <h3>DevOps & Cloud</h3>
+        <p>CI/CD, infra-as-code, zero-downtime deploys. Ship fearlessly.</p>
+        <div class="b-tags">
+          <span *ngFor="let t of devopsTags">{{ t }}</span>
+        </div>
+        <div class="b-glow"></div>
+        <div class="b-number">04</div>
+      </div>
+
+      <!-- CTA card -->
+      <div class="bento-card b-cta">
+        <div class="cta-orb"></div>
+        <div class="cta-content">
+          <span class="cta-eyebrow">Ready to build?</span>
+          <h3>Let's talk about your next project</h3>
+          <button class="cta-primary" (click)="scroll('contact')">
+            <span>Get in Touch</span>
+            <i class='bx bx-right-arrow-alt'></i>
           </button>
         </div>
-
-        <!-- Decorative glow -->
-        <div class="panel-glow" [style.background]="svc.gradient"></div>
       </div>
+
     </div>
   </div>
 </section>

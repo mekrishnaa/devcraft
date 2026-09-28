@@ -1,132 +1,119 @@
 <section id="hero" class="hero">
-  <!-- Particle canvas -->
-  <canvas id="particles"></canvas>
+  <canvas id="hero-canvas" class="hero-canvas"></canvas>
+  <div class="noise"></div>
+  <div class="aurora"></div>
 
-  <!-- Background orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="container hero-inner">
 
-  <!-- Grid overlay -->
-  <div class="grid-overlay"></div>
+    <!-- ── LEFT ───────────────────────────── -->
+    <div class="hero-left">
 
-  <div class="container hero-content">
-    <div class="hero-text">
-      <!-- Availability badge -->
-      <div class="availability-badge">
-        <span class="dot"></span>
-        Available for new projects
+      <div class="hero-eyebrow">
+        <span class="live-dot"></span>
+        Available for projects · 2026
       </div>
 
-      <h1>
-        We Build<br>
-        <span class="typewriter-wrapper">
-          <span class="gradient-text typewriter">{{ displayWord }}</span><span class="cursor">|</span>
+      <h1 class="hero-title">
+        <span class="line-sm">WE BUILD</span>
+        <span class="line-typed">
+          <span class="typed-text">{{ displayWord }}</span><span class="caret"></span>
         </span>
-        <br>Excellence
+        <span class="line-lg">EXCELLENCE</span>
       </h1>
 
-      <p class="hero-desc">
-        We're a team of <strong>4 elite freelancers</strong> with 4–5 years each of hands-on experience in
-        Frontend, Backend, Database, and DevOps — delivering full-stack digital products that
-        <em>stand out</em>.
+      <p class="hero-sub">
+        Four elite specialists. One powerhouse team. We engineer digital
+        products — from pixel to production — beautifully, reliably, and at speed.
       </p>
 
-      <div class="hero-actions">
-        <button class="btn btn-primary" (click)="scrollTo('contact')">
-          <i class='bx bx-rocket'></i> Start a Project
+      <div class="hero-ctas">
+        <button class="cta-primary" (click)="scrollTo('contact')">
+          <span>Start a Project</span>
+          <i class='bx bx-right-arrow-alt'></i>
         </button>
-        <button class="btn btn-outline" (click)="scrollTo('projects')">
-          <i class='bx bx-play-circle'></i> View Our Work
+        <button class="cta-ghost" (click)="scrollTo('projects')">
+          <i class='bx bx-play-circle'></i>
+          <span>View Our Work</span>
         </button>
       </div>
 
-      <!-- Stats Row -->
-      <div class="hero-stats">
-        <div class="stat">
-          <strong>50+</strong>
-          <span>Projects Delivered</span>
-        </div>
-        <div class="divider"></div>
-        <div class="stat">
-          <strong>4–5 yrs</strong>
-          <span>Per Specialist</span>
-        </div>
-        <div class="divider"></div>
-        <div class="stat">
-          <strong>100%</strong>
-          <span>Client Satisfaction</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hero Visual -->
-    <div class="hero-visual">
-      <div class="visual-card">
-        <div class="card-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="card-title">team_expertise.json</span>
-        </div>
-        <div class="card-body">
-          <pre><code><span class="c-bracket">&#123;</span>
-  <span class="c-key">"team"</span>: <span class="c-bracket">[</span>
-    <span class="c-bracket">&#123;</span>
-      <span class="c-key">"role"</span>: <span class="c-string">"Frontend Dev"</span>,
-      <span class="c-key">"exp"</span>: <span class="c-number">5</span>,
-      <span class="c-key">"tech"</span>: <span class="c-string">"React, Angular"</span>
-    <span class="c-bracket">&#125;</span>,
-    <span class="c-bracket">&#123;</span>
-      <span class="c-key">"role"</span>: <span class="c-string">"Backend Dev"</span>,
-      <span class="c-key">"exp"</span>: <span class="c-number">4</span>,
-      <span class="c-key">"tech"</span>: <span class="c-string">"Node, Python"</span>
-    <span class="c-bracket">&#125;</span>,
-    <span class="c-bracket">&#123;</span>
-      <span class="c-key">"role"</span>: <span class="c-string">"DB Engineer"</span>,
-      <span class="c-key">"exp"</span>: <span class="c-number">4</span>,
-      <span class="c-key">"tech"</span>: <span class="c-string">"PostgreSQL, Redis"</span>
-    <span class="c-bracket">&#125;</span>,
-    <span class="c-bracket">&#123;</span>
-      <span class="c-key">"role"</span>: <span class="c-string">"DevOps Eng"</span>,
-      <span class="c-key">"exp"</span>: <span class="c-number">5</span>,
-      <span class="c-key">"tech"</span>: <span class="c-string">"AWS, Docker, K8s"</span>
-    <span class="c-bracket">&#125;</span>
-  <span class="c-bracket">]</span>,
-  <span class="c-key">"status"</span>: <span class="c-string">"Available ✓"</span>
-<span class="c-bracket">&#125;</span></code></pre>
-        </div>
-        <!-- Floating badges -->
-        <div class="floating-badge badge-1">
-          <i class='bx bx-check-shield'></i> Full-Stack Team
-        </div>
-        <div class="floating-badge badge-2">
-          <i class='bx bxs-star'></i> Top Rated
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tech Stack Ticker -->
-  <div class="tech-ticker">
-    <div class="ticker-inner">
-      <div class="ticker-track">
-        <span *ngFor="let tech of techStack" class="ticker-item">
-          <i class='bx {{ tech.icon }}'></i> {{ tech.label }}
-        </span>
-        <!-- Duplicate for seamless loop -->
-        <span *ngFor="let tech of techStack" class="ticker-item" aria-hidden="true">
-          <i class='bx {{ tech.icon }}'></i> {{ tech.label }}
+      <div class="role-pills">
+        <span class="role-pill" *ngFor="let r of roles" [style.--pill-color]="r.color">
+          <span class="pill-dot" [style.background]="r.color"></span>
+          {{ r.label }}
         </span>
       </div>
     </div>
+
+    <!-- ── RIGHT ──────────────────────────── -->
+    <div class="hero-right">
+
+      <div class="expertise-grid">
+        <!-- Frontend -->
+        <div class="exp-card exp-purple">
+          <div class="exp-icon"><i class='bx bx-paint'></i></div>
+          <strong>Frontend</strong>
+          <span>React · Angular · Next.js</span>
+          <div class="exp-badge">5 yrs</div>
+          <div class="exp-glow"></div>
+        </div>
+
+        <!-- Backend -->
+        <div class="exp-card exp-cyan">
+          <div class="exp-icon"><i class='bx bx-server'></i></div>
+          <strong>Backend</strong>
+          <span>Node.js · Python · Go</span>
+          <div class="exp-badge">4 yrs</div>
+          <div class="exp-glow"></div>
+        </div>
+
+        <!-- Database -->
+        <div class="exp-card exp-pink">
+          <div class="exp-icon"><i class='bx bx-data'></i></div>
+          <strong>Database</strong>
+          <span>PostgreSQL · MongoDB</span>
+          <div class="exp-badge">4 yrs</div>
+          <div class="exp-glow"></div>
+        </div>
+
+        <!-- DevOps -->
+        <div class="exp-card exp-green">
+          <div class="exp-icon"><i class='bx bx-cloud'></i></div>
+          <strong>DevOps</strong>
+          <span>AWS · Docker · K8s</span>
+          <div class="exp-badge">5 yrs</div>
+          <div class="exp-glow"></div>
+        </div>
+
+        <!-- Centre badge -->
+        <div class="grid-center">
+          <i class='bx bx-code-alt'></i>
+        </div>
+      </div>
+
+      <!-- Floating pills -->
+      <div class="float-metric float-a">
+        <strong>50+</strong><span>Projects Done</span>
+      </div>
+      <div class="float-metric float-b">
+        <strong>100%</strong><span>Satisfaction</span>
+      </div>
+    </div>
+
+  </div><!-- /hero-inner -->
+
+  <!-- ── Tech ticker ─────────────────────── -->
+  <div class="hero-ticker">
+    <div class="ticker-fade l"></div>
+    <div class="ticker-track">
+      <span class="tick-item" *ngFor="let t of techTicker">
+        {{ t }} <span class="tick-dot"></span>
+      </span>
+      <span class="tick-item" *ngFor="let t of techTicker" aria-hidden="true">
+        {{ t }} <span class="tick-dot"></span>
+      </span>
+    </div>
+    <div class="ticker-fade r"></div>
   </div>
 
-  <!-- Scroll hint -->
-  <div class="scroll-hint" (click)="scrollTo('stats')">
-    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
-    <span>Scroll to explore</span>
-  </div>
 </section>

@@ -1,33 +1,30 @@
 <nav class="navbar" [class.scrolled]="isScrolled">
   <div class="container nav-inner">
-    <!-- Logo -->
+
     <div class="logo" (click)="scrollTo('hero')">
-      <div class="logo-icon">
-        <i class='bx bx-code-alt'></i>
-      </div>
-      <span class="logo-text">Dev<span class="highlight">Craft</span></span>
+      <div class="logo-icon"><i class='bx bx-code-alt'></i></div>
+      <span class="logo-text">Dev<span class="hl">Craft</span></span>
     </div>
 
-    <!-- Nav Links (Desktop) -->
     <ul class="nav-links" [class.open]="menuOpen">
       <li *ngFor="let link of navLinks">
         <a (click)="scrollTo(link.href)">{{ link.label }}</a>
       </li>
       <li class="mobile-cta">
-        <button class="btn btn-primary btn-sm" (click)="scrollTo('contact')">
+        <button class="nav-hire-btn" (click)="scrollTo('contact')">
           Hire Us <i class='bx bx-right-arrow-alt'></i>
         </button>
       </li>
     </ul>
 
-    <!-- CTA + Hamburger -->
     <div class="nav-actions">
-      <button class="btn btn-primary btn-sm desktop-cta" (click)="scrollTo('contact')">
+      <button class="nav-hire-btn desktop" (click)="scrollTo('contact')">
         Hire Us <i class='bx bx-right-arrow-alt'></i>
       </button>
-      <button class="hamburger" [class.active]="menuOpen" (click)="toggleMenu()" aria-label="Toggle menu">
+      <button class="hamburger" [class.open]="menuOpen" (click)="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
+
   </div>
 </nav>

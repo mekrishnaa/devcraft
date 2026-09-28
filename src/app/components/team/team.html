@@ -1,79 +1,65 @@
 <section id="team" class="team-section">
-  <div class="orb" style="width:350px;height:350px;background:rgba(250,112,154,0.12);bottom:-100px;left:-80px;"></div>
+  <div class="orb-tl"></div>
+  <div class="orb-br"></div>
 
   <div class="container">
     <div class="section-header">
-      <div class="badge"><i class='bx bx-group'></i> Meet the Team</div>
-      <h2>The Minds Behind <span>Your Success</span></h2>
-      <p>Four specialized experts, one unified mission — building products that make a difference.</p>
+      <div class="badge-pill"><i class='bx bx-group'></i> Meet the Team</div>
+      <h2>The Minds Behind <span class="grad-text">Your Success</span></h2>
+      <p>Four dedicated specialists united by one mission — building products that matter.</p>
     </div>
 
     <div class="team-grid">
-      <div
-        class="member-card"
-        *ngFor="let member of members; let i = index"
-        [class.active]="activeCard === i"
-        [style.--member-color]="member.color"
-        (mouseenter)="setActive(i)"
-        (mouseleave)="setActive(null)">
+      <div class="member-card"
+           *ngFor="let member of members; let i = index"
+           [class.active]="activeCard === i"
+           [style.--member-color]="member.color"
+           (mouseenter)="setActive(i)"
+           (mouseleave)="setActive(null)">
 
-        <!-- Glowing border top -->
-        <div class="card-top-glow" [style.background]="member.gradient"></div>
+        <div class="card-top-bar" [style.background]="member.gradient"></div>
 
-        <!-- Header -->
         <div class="card-header">
           <div class="avatar" [style.background]="member.gradient">
             <span>{{ member.avatar }}</span>
             <div class="avatar-ring" [style.border-color]="member.color"></div>
           </div>
-          <div class="member-info">
+          <div class="member-meta">
             <h3>{{ member.name }}</h3>
-            <span class="role" [style.color]="member.color">{{ member.role }}</span>
-            <div class="exp-badge">
-              <i class='bx bx-time-five'></i> {{ member.experience }}+ years
+            <span class="role-label" [style.color]="member.color">{{ member.role }}</span>
+            <div class="exp-tag">
+              <i class='bx bx-time-five'></i> {{ member.experience }}+ yrs
             </div>
           </div>
         </div>
 
         <p class="tagline">{{ member.tagline }}</p>
 
-        <!-- Skill bars -->
         <div class="skills">
-          <div class="skill-row" *ngFor="let skill of member.skills">
-            <div class="skill-meta">
-              <span class="skill-name">{{ skill.name }}</span>
-              <span class="skill-pct" [style.color]="member.color">{{ skill.level }}%</span>
+          <div class="skill-row" *ngFor="let s of member.skills">
+            <div class="skill-head">
+              <span class="skill-name">{{ s.name }}</span>
+              <span class="skill-pct" [style.color]="member.color">{{ s.level }}%</span>
             </div>
             <div class="skill-bar">
               <div class="skill-fill"
-                   [style.width.%]="skill.level"
+                   [style.width.%]="s.level"
                    [style.background]="member.gradient">
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Tools -->
         <div class="tools">
-          <span class="tag" *ngFor="let tool of member.tools"
-                [style.border-color]="getTagBorder(member.color)"
-                [style.color]="member.color">
-            {{ tool }}
-          </span>
+          <span class="tool-tag" *ngFor="let t of member.tools">{{ t }}</span>
         </div>
 
-        <!-- Social -->
         <div class="social-links">
-          <a [href]="member.social.github" class="social-btn" title="GitHub">
-            <i class='bx bxl-github'></i>
-          </a>
-          <a [href]="member.social.linkedin" class="social-btn" title="LinkedIn">
-            <i class='bx bxl-linkedin'></i>
-          </a>
-          <a [href]="member.social.twitter" class="social-btn" title="Twitter">
-            <i class='bx bxl-twitter'></i>
-          </a>
+          <a [href]="member.social.github"   class="soc-btn" title="GitHub"><i class='bx bxl-github'></i></a>
+          <a [href]="member.social.linkedin" class="soc-btn" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+          <a [href]="member.social.twitter"  class="soc-btn" title="Twitter"><i class='bx bxl-twitter'></i></a>
         </div>
+
       </div>
     </div>
   </div>
